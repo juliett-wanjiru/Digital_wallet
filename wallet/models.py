@@ -1,5 +1,7 @@
 from audioop import maxpp
 from datetime import date, datetime
+from distutils.command.upload import upload
+from inspect import signature
 from locale import currency
 from operator import length_hint
 from django.db import models
@@ -19,6 +21,7 @@ class Customer(models.Model):
     age = models.PositiveSmallIntegerField()
     nationality =models.CharField(max_length=15)
     email = models.EmailField()
+    signature=models.ImageField(default='default.jpg', upload_to="headshot")
     
 class Account(models.Model):
     account_number=models.IntegerField()
@@ -43,7 +46,7 @@ class Transaction(models.Model):
     destination=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="Transaction_destination")
     transaction_charge=models.IntegerField()
     date_time=models.DateTimeField(default=datetime.now)
-    
+  
 class Card(models.Model):
     card_number=models.IntegerField()
     card_pin =models.IntegerField()
@@ -53,6 +56,7 @@ class Card(models.Model):
     wallet=models.ForeignKey(on_delete=models.CASCADE,to=Wallet)
     account=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="account_b")
     issuer=models.CharField(max_length=7)
+    # signature=models.ImageField()
     
 class ThirdPary(models.Model):
     nameof_thirdparty=models.CharField(max_length=13)
@@ -68,9 +72,10 @@ class Receipt(models.Model):
     receipt_date=models.DateTimeField(default=datetime.now)
     bill_number=models.IntegerField()
     total_amount=models.IntegerField()
+    # file=models.FileField()
     
 class Notification(models.Model):
-    message=models.TextField(max_length=12)
+    message=models.TextField(max_length=100)
     title=models.CharField(max_length=10)
     datetime=models.DateTimeField(default=datetime.now)
     recipient=models.ForeignKey(on_delete=models.CASCADE,to=Receipt)
