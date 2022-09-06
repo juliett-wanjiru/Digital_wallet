@@ -42,7 +42,7 @@ class Transaction(models.Model):
     transaction_amount=models.IntegerField()
     transaction_number=models.IntegerField()
     transaction_type=models.CharField(max_length=15)
-    Origin_account=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="Transaction_original_account")
+    origin_account=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="Transaction_original_account")
     destination=models.ForeignKey(Account,on_delete=models.CASCADE,related_name="Transaction_destination")
     transaction_charge=models.IntegerField()
     date_time=models.DateTimeField(default=datetime.now)
@@ -98,12 +98,4 @@ class Reward(models.Model):
     zpoints=models.IntegerField()
     date_of_reward=models.DateTimeField(default=datetime.now)
     recipient=models.ForeignKey(on_delete=models.CASCADE, to=Customer)
-    
-    
-    
-    
-
-
-    
-    
     
