@@ -10,7 +10,7 @@ class CustomerRegistrationForm(forms.ModelForm):
 
 class AccountRegistrationForm(forms.ModelForm):
     class Meta:
-        mosel=Account
+        model=Account
         fields = "__all__"
         
 class WalletRegistrationForm(forms.ModelForm):
