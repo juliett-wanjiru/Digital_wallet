@@ -11,6 +11,9 @@ from .models import Receipt
 from .models import Loan
 from .models import Reward
 # Register your models here.
+# querying data
+# retrive a subset of data stored in a model
+# apply filtering  to your query based on the attributes of your model
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display=("first_name","last_name","email")

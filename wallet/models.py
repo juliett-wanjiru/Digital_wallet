@@ -6,7 +6,8 @@ from locale import currency
 from operator import length_hint
 from django.db import models
 
-
+# all, get filter
+# making queries(assignmentp for python )
 
 # Create your models here.
 class Customer(models.Model):
@@ -94,7 +95,7 @@ class Loan(models.Model):
 class Reward(models.Model):
     name=models.CharField(max_length=12)
     customer_id=models.IntegerField()
-    gender_1=models.CharField(max_length=11)
+    gender_1=models.    (max_length=11)
     zpoints=models.IntegerField()
     date_of_reward=models.DateTimeField(default=datetime.now)
     recipient=models.ForeignKey(on_delete=models.CASCADE, to=Customer)

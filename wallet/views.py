@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from distutils.command.install_egg_info import to_filename
+from django.shortcuts import render,redirect
 from . import models
+
 
 
 from .forms import CustomerRegistrationForm,AccountRegistrationForm,WalletRegistrationForm,TransactionRegistrationForm,CardRegistrationForm,ThirdParyRegistrationForm,ReceiptRegistrationForm,NotificationRegistrationForm,LoanRegistrationForm,RewardRegistrationForm
 
-# Create your views here.
-
+# Create your views here.  
+    
 def register_customer(request):
     if request.method == "POST":
           form = CustomerRegistrationForm(request.POST)
@@ -22,13 +24,38 @@ def list_customer(request):
     return render (request, 'walletT/customer_list.html',
                    {"customers":customers})       
         
-  
-   
+def customer_profile(request,id):
+    customers=models.Customer.objects.get(id=id)
+    return render (request, 'walletT/customer_profile.html',
+                   {"customers":customers}) 
+# EDITING DATA
+def edit_customer(request,id):
+    if request.method == "POST":
+          form = CustomerRegistrationForm(request.POST,instance=models.Customer)
+          if form.is_valid():
+              form.save()
+              return redirect("customer_profile",id=models.Customer.id)
+    else:
+        form = CustomerRegistrationForm(instance=models.Customer)
+        return render(request, 'walletT/edit_customer.html',
+                  {"form":form})
+        
     
 def register_account(request):
-    form = AccountRegistrationForm()
+    if request.method == "POST":
+        form=AccountRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form=AccountRegistrationForm()
     return render(request, 'walletT/register_account.html',
                   {"form":form})
+    
+def list_account(request):
+    accounts = models.Account.objects.all()
+    return render (request, 'walletT/account_list.html',
+                   {"accounts":accounts})       
+        
     
 def register_wallet(request):
     form = WalletRegistrationForm()

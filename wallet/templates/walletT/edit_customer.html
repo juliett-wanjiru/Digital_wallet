@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% comment %} listing data {% endcomment %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>Customer</title>
 </head>
 <body>
-    <h2>Account Registration</h2>
+    <h2>Edit Customer</h2>
 <form method="POST">{% csrf_token %}
     {{form.as_p}}
     <button type="submit" class= "safe btn btn-default">register</button>
-</form>
+</form>wallet.views
 </body>
 </html>
